@@ -1,0 +1,95 @@
+#include "Vector.h"
+
+#include <iostream>
+
+Vector::Vector() {
+  elems = nullptr;
+  sz = 0;
+  std::cout << "Empty vector" << std::endl;
+}
+Vector::Vector(double* arr, int size) {
+  sz = size;
+  elems = new double[sz];
+  for (int i = 0; i < sz; ++i) elems[i] = arr[i];
+  std::cout << "vector whith array" << std::endl;
+}
+Vector::Vector(const Vector& other_vec) {
+  sz = other_vec.sz;
+  elems = new double[sz];
+  for (int i = 0; i < sz; ++i) elems[i] = other_vec.elems[i];
+  std::cout << "vector whith another one copy " << std::endl;
+}
+Vector::Vector(Vector&& other_vec) {
+  std::swap(sz, other_vec.sz);
+  std::swap(elems, other_vec.elems);
+  std::cout << "vector whith another one swap" << std::endl;
+}
+Vector::~Vector() {
+  if (elems) {
+    delete[] elems;
+    sz = 0;
+    std::cout << "Vector is cleared." << std::endl;
+  }
+}
+
+int Vector::size() {
+  return sz;
+}
+bool Vector::empty() {
+  return sz == 0;
+}
+void Vector::clear() {
+  if (!empty()) {
+    delete[] elems;
+    elems = nullptr;
+    sz = 0;
+    std::cout << "Vector is cleared" << std::endl;
+  }
+}
+
+double Vector::operator [] (int idx) {
+  return elems[idx];
+}
+Vector& Vector::operator = (const Vector& other_vec) {
+  sz = other_vec.sz;
+  elems = new double[sz];
+  for (int i = 0; i < sz; ++i) elems[i] = other_vec.elems[i];
+  return *this;
+}
+Vector& Vector::operator = (Vector&& other_vec) {
+  std::swap(sz, other_vec.sz);
+  std::swap(elems, other_vec.elems);
+  return *this;
+}
+
+std::istream& operator >> (std::istream& in, Vector& vec) {
+  int sz;
+  in >> sz;
+  double* arr = new double[sz];
+  for (int i = 0; i < sz; ++i) {
+    in >> arr[i];
+  }
+  Vector vv(arr, sz);
+  vec = vv;
+  delete[] arr;
+  vv.clear();
+  return in;
+}
+std::ostream& operator << (std::ostream& out, Vector& vec) {
+  out << vec.size() << '\n';
+  for (int i = 0; i < vec.size(); ++i) {
+    out << vec[i] << ' ';
+  }
+  out << std::endl;
+  return out;
+}
+
+Vector operator + (Vector& vec1, Vector& vec2) {
+  int sz = vec1.size() + vec2.size();
+  double* arr = new double[sz];
+  for (int i = 0; i < vec1.size(); ++i) arr[i] = vec1[i];
+  for (int i = 0; i < vec1.size(); ++i) arr[vec1.size() + i] = vec2[i];
+  Vector res_vec(arr, sz);
+  delete[] arr;
+  return res_vec;
+}

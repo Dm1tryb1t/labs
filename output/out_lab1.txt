@@ -1,0 +1,5 @@
+		Protection classes that can be used for:
+	Name: qqq
+	Protection class number: 2
+	Name: eee
+	Protection class number: 4

@@ -1,0 +1,12 @@
+		==========Employee 1 ==========
+	hire date: 12.12.12
+	position: ppp
+	salary: 1234
+		==========Employee 2 ==========
+	hire date: 21.12.21
+	position: www
+	salary: 123
+		==========Employee 3 ==========
+	hire date: 23.12.23
+	position: qqq
+	salary: 123456
