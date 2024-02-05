@@ -20,11 +20,7 @@ int main() {
   
   std::cout << "\t\tCuboid parameters:\n";
   cuboid->print_sidesValue();
-  try {
-    cuboid->print_areaValue();
-  } catch (const std::exception& e) {
-    std::cerr << "Error: " << e.what() << std::endl;
-  }
+  cuboid->print_areaValue();
   
   delete rectangle;
   delete cuboid;
