@@ -13,22 +13,27 @@ Employee::Employee(std::string fio, std::string hireDate, std::string position, 
   this->position = position;
   this->salary = salary;
 }
-/*Employee::Employee(Employee& employee) {
+Employee::Employee(const Employee& employee) {
+  fio = employee.fio;
+  hireDate = employee.hireDate;
+  position = employee.position;
+  salary = employee.salary;
+  /*this->fio = employee.getFio();
   this->hireDate = employee.getHireDate();
   this->position = employee.getPosition();
-  this->salary = employee.getSalary();
-}*/
+  this->salary = employee.getSalary();*/
+}
 
-std::string Employee::getFio() {
+std::string Employee::getFio() const {
   return fio;
 }
-std::string Employee::getHireDate() {
+std::string Employee::getHireDate() const {
   return hireDate;
 }
-std::string Employee::getPosition() {
+std::string Employee::getPosition() const {
   return position;
 }
-int Employee::getSalary() {
+int Employee::getSalary() const {
   return salary;
 }
 void Employee::updateSalary(int salary) {
@@ -46,20 +51,25 @@ Employee& Employee::operator = (Employee& employee) {
   return std::hash<int>()(employee.getSalary());
 }*/
 
-bool operator < (Employee& first, Employee& second) {
+size_t MyHashFunction::operator()(const Employee& employee) const {
+  return employee.getSalary();
+}
+
+bool operator < (const Employee& first, const Employee& second) {
   return first.getSalary() < second.getSalary();
 }
-bool operator > (Employee& first, Employee& second) {
+bool operator > (const Employee& first, const Employee& second) {
   return first.getSalary() > second.getSalary();
 }
-bool operator == (Employee& first, Employee& second) {
-  return !((first < second) || (first > second));
+bool operator == (const Employee& first, const Employee& second) {
+  return first.getSalary() == second.getSalary();
 }
 
 
 
-std::ostream& operator << (std::ostream& out, Employee& employee) {
-  return out << "\thire date: " << employee.getHireDate() << std::endl
+std::ostream& operator << (std::ostream& out, const Employee& employee) {
+  return out << "\tFIO: " << employee.getFio() << std::endl
+      << "\thire date: " << employee.getHireDate() << std::endl
       << "\tposition: " << employee.getPosition() << std::endl
       << "\tsalary: " << employee.getSalary() << std::endl;
 }

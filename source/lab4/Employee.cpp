@@ -13,7 +13,7 @@ Employee::Employee(std::string fio, std::string hireDate, std::string position, 
   this->position = position;
   this->salary = salary;
 }
-Employee::Employee(Employee& employee) {
+Employee::Employee(const Employee& employee) {
   fio = employee.fio;
   hireDate = employee.hireDate;
   position = employee.position;

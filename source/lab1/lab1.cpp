@@ -7,6 +7,7 @@
 #include<string>
 #include<vector>
 
+std::string tmp;
 int solve_with_indicator() {
   std::ifstream fin;
   fin.open("./input/input_lab1.txt");
@@ -15,18 +16,39 @@ int solve_with_indicator() {
     return 1;
   }
   int number_of_Hardware_and_software_protection;
-  fin >> number_of_Hardware_and_software_protection;
+  getline(fin, tmp);
+  try {
+    number_of_Hardware_and_software_protection = stoi(tmp);
+  } catch (const std::invalid_argument& ia) {
+    std::cerr << ia.what() << std::endl;
+    fin.close();
+    return 1;
+  }
   Hardware_and_software_protection** protection_class = 
                 new Hardware_and_software_protection*[number_of_Hardware_and_software_protection];
   std::string protection_class_name;
   int protection_class_number;
   for (int i = 0; i < number_of_Hardware_and_software_protection; ++i) {
     getline(fin, protection_class_name);
-    fin >> protection_class_number;
+    getline(fin, tmp);
+    try {
+      protection_class_number = stoi(tmp);
+    } catch (const std::invalid_argument& ia) {
+      std::cerr << ia.what() << std::endl;
+      fin.close();
+      return 1;
+    }
     protection_class[i] = 
               new Hardware_and_software_protection(protection_class_name, protection_class_number);
   }
-  fin >> protection_class_number;
+  getline(fin, tmp);
+  try {
+    protection_class_number = stoi(tmp);
+  } catch (const std::invalid_argument& ia) {
+    std::cerr << ia.what() << std::endl;
+    fin.close();
+    return 1;
+  }
   fin.close();
 
   std::ofstream fout;
@@ -57,17 +79,39 @@ int solve_with_vector() {
     return 1;
   }
   int number_of_Hardware_and_software_protection;
-  fin >> number_of_Hardware_and_software_protection;
-  std::vector<Hardware_and_software_protection*> protection_class(number_of_Hardware_and_software_protection); 
+  getline(fin, tmp);
+  try {
+    number_of_Hardware_and_software_protection = stoi(tmp);
+  } catch (const std::invalid_argument& ia) {
+    std::cerr << ia.what() << std::endl;
+    fin.close();
+    return 1;
+  }
+  std::vector<Hardware_and_software_protection*> protection_class(number_of_Hardware_and_software_protection);
   std::string protection_class_name;
   int protection_class_number;
   for (int i = 0; i < number_of_Hardware_and_software_protection; ++i) {
     getline(fin, protection_class_name);
-    fin >> protection_class_number;
+    getline(fin, tmp);
+    try {
+      protection_class_number = stoi(tmp);
+    } catch (const std::invalid_argument& ia) {
+      std::cerr << ia.what() << std::endl;
+      fin.close();
+      return 1;
+    }
     protection_class[i] = 
               new Hardware_and_software_protection(protection_class_name, protection_class_number);
   }
-  fin >> protection_class_number;
+  getline(fin, tmp);
+  try {
+    protection_class_number = stoi(tmp);
+  } catch (const std::invalid_argument& ia) {
+    std::cerr << ia.what() << std::endl;
+    fin.close();
+    return 1;
+  }
+   
   fin.close();
   
   std::ofstream fout;
@@ -91,5 +135,5 @@ int solve_with_vector() {
 
 int main() {
   return solve_with_indicator();
-  return solve_with_vector();
+  // return solve_with_vector();
 }

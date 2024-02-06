@@ -7,29 +7,42 @@
 #include <string>
 #include <vector>
 
+std::string tmp;
 int main() {
   std::list<Employee> employees_list;
   std::vector<Employee> employees_vec;
-  std::cout << "Set the count of employees: ";
-  int employees_count;
-  std::cin >> employees_count;
-  std::string fio, hireDate, position; int salary;
   std::ifstream fin("./input/input_lab4.txt");
   if (!fin.is_open()) {
     std::cerr << "Error: Couldn't open input file" << std::endl;
     return 1;
   }
+  int employees_count;
+  getline(fin, tmp);
+  try {
+    employees_count = std::stoi(tmp);
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Error: Invalid employees' count" << std::endl;
+    std::cerr << e.what() << std::endl;
+    fin.close();
+    return 1;
+  }
+  std::string fio;
+  std::string hireDate;
+  std::string position;
+  int salary;
   for (int i = 0; i < employees_count; ++i) {
-    /*std::cout << "\t\t==========Employee " << i + 1 << " ==========\n";
-    std::cout << "hire date: ";
-    std::cin.sync();*/
     getline(fin, fio);
     getline(fin, hireDate);
-    /*std::cout << "position: ";
-    std::cin.sync();*/
     getline(fin, position);
-    // std::cout << "salary: ";
-    fin >> salary;
+    getline(fin, tmp);
+    try {
+      salary = std::stoi(tmp);
+    } catch (const std::invalid_argument &e) {
+      std::cerr << "Error: Invalid salary" << std::endl;
+      std::cerr << e.what() << std::endl;
+      fin.close();
+      return 1;
+    }
     employees_list.push_back(Employee(fio, hireDate, position, salary));
   }
   fin.close();

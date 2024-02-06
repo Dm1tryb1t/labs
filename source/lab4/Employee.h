@@ -14,7 +14,7 @@ protected:
 public:
   Employee();
   Employee(std::string, std::string, std::string, int);
-  Employee(Employee&);
+  Employee(const Employee&);
   std::string getFio();
   std::string getHireDate();
   std::string getPosition();

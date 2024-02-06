@@ -1,5 +1,7 @@
 		Protection classes that can be used for:
-	Name: qqq
+	Name: C10
 	Protection class number: 2
-	Name: eee
-	Protection class number: 4
+	Name: C8
+	Protection class number: 2
+	Name: C7
+	Protection class number: 1

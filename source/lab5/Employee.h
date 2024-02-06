@@ -14,23 +14,26 @@ protected:
 public:
   Employee();
   Employee(std::string, std::string, std::string, int);
-  std::string getFio();
-  std::string getHireDate();
-  std::string getPosition();
-  int getSalary();
+  Employee(const Employee&);
+  std::string getFio() const;
+  std::string getHireDate() const;
+  std::string getPosition()const ;
+  int getSalary() const;
   // .Employee(Employee&);
   void updateSalary(int);
   Employee& operator = (Employee&);
-  /*class HashFunction {
-  public:
-    size_t operator () (Employee) const;
-  };*/
 };
 
-bool operator < (Employee& first, Employee& second);
-bool operator > (Employee& first, Employee& second);
-bool operator == (Employee& first, Employee& second);
+class MyHashFunction {
+public:
+  // salary is returned as hash function
+  size_t operator()(const Employee& employee) const;
+};
 
-std::ostream& operator << (std::ostream&, Employee&);
+bool operator < (const Employee& first, const Employee& second);
+bool operator > (const Employee& first, const Employee& second);
+bool operator == (const Employee& first, const Employee& second);
+
+std::ostream& operator << (std::ostream&, const Employee&);
 
 #endif

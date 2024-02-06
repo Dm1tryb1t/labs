@@ -8,17 +8,28 @@
 
 // g++ source/lab5/lab5.cpp source/lab5/Employee.cpp -o build/lab5
 
+
+std::string tmp;
 int main() {
   std::set<Employee> employees_set;
   // std::unordered_set<Employee, Employee::HashFunction> employees_uset;
+  std::unordered_set<Employee, MyHashFunction> employees_uset;
   int employees_count;
   std::ifstream fin;
-  fin.open("input_lab5.txt");
+  fin.open("./input/input_lab5.txt");
   if (!fin.is_open()) {
     std::cerr << "Error: Could not open input file" << std::endl;
     return 1;
   }
-  fin >> employees_count;
+  getline(fin, tmp);
+  try {
+    employees_count = std::stoi(tmp);
+  } catch (const std::invalid_argument &e) {
+    std::cerr << "Error: Invalid employees' count" << std::endl;
+    std::cerr << e.what() << std::endl;
+    fin.close();
+    return 1;
+  }
   std::string fio;
   std::string hireDate;
   std::string position;
@@ -27,29 +38,38 @@ int main() {
     getline(fin, fio);
     getline(fin, hireDate);
     getline(fin, position);
-    fin >> salary;
+    getline(fin, tmp);
+    try {
+      salary = std::stoi(tmp);
+    } catch (const std::invalid_argument &e) {
+      std::cerr << "Error: Invalid salary" << std::endl;
+      std::cerr << e.what() << std::endl;
+      fin.close();
+      return 1;
+    }
     employees_set.insert(Employee(fio, hireDate, position, salary));
-    //  employees_uset.insert(Employee(fio, hireDate, position, salary));
+    employees_uset.insert(Employee(fio, hireDate, position, salary));
   }
   fin.close();
   std::ofstream fout_set;
-  fout_set.open("out_set_lab5.txt");
+  fout_set.open("./output/out_set_lab5.txt");
   if (!fout_set.is_open()) {
     std::cerr << "Error: Could not open output file" << std::endl;
     return 1;
   }
-  for (auto employee : employees_set) {
+  for (const auto& employee : employees_set) {
     fout_set << employee;
   }
   fout_set.close();
   std::ofstream fout_uset;
-  fout_uset.open("out_uset_lab5.txt");
+  fout_uset.open("./output/out_uset_lab5.txt");
   if (!fout_uset.is_open()) {
     std::cerr << "Error: Could not open output file" << std::endl;
     return 1;
   }
-  /*for (auto employee : employees_uset) {
+  for (const auto& employee : employees_uset) {
     fout_uset << employee;
-  }*/ fout_uset.close();
+  }
+  fout_uset.close();
   return 0;
 }
