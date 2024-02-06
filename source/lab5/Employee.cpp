@@ -42,9 +42,9 @@ Employee& Employee::operator = (Employee& employee) {
   return *this;
 } 
 
-size_t Employee::HashFunction::operator()(Employee employee) const {
+/*size_t Employee::HashFunction::operator()(Employee employee) const {
   return std::hash<int>()(employee.getSalary());
-}
+}*/
 
 bool operator < (Employee& first, Employee& second) {
   return first.getSalary() < second.getSalary();

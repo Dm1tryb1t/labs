@@ -21,10 +21,10 @@ public:
   // .Employee(Employee&);
   void updateSalary(int);
   Employee& operator = (Employee&);
-  class HashFunction {
+  /*class HashFunction {
   public:
     size_t operator () (Employee) const;
-  };
+  };*/
 };
 
 bool operator < (Employee& first, Employee& second);

@@ -13,7 +13,7 @@ int main() {
   std::cout << "Set the count of employees: ";
   int employees_count;
   std::cin >> employees_count;
-  std::string hireDate, position; int salary;
+  std::string fio, hireDate, position; int salary;
   std::ifstream fin("./input/input_lab4.txt");
   if (!fin.is_open()) {
     std::cerr << "Error: Couldn't open input file" << std::endl;
@@ -23,13 +23,14 @@ int main() {
     /*std::cout << "\t\t==========Employee " << i + 1 << " ==========\n";
     std::cout << "hire date: ";
     std::cin.sync();*/
+    getline(fin, fio);
     getline(fin, hireDate);
     /*std::cout << "position: ";
     std::cin.sync();*/
     getline(fin, position);
     // std::cout << "salary: ";
     fin >> salary;
-    employees_list.push_back(Employee(hireDate, position, salary));
+    employees_list.push_back(Employee(fio, hireDate, position, salary));
   }
   fin.close();
   employees_vec.resize(employees_count);

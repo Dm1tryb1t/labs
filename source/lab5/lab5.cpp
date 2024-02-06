@@ -10,7 +10,7 @@
 
 int main() {
   std::set<Employee> employees_set;
-  std::unordered_set<Employee, Employee::HashFunction> employees_uset;
+  // std::unordered_set<Employee, Employee::HashFunction> employees_uset;
   int employees_count;
   std::ifstream fin;
   fin.open("input_lab5.txt");
@@ -29,7 +29,7 @@ int main() {
     getline(fin, position);
     fin >> salary;
     employees_set.insert(Employee(fio, hireDate, position, salary));
-    employees_uset.insert(Employee(fio, hireDate, position, salary));
+    //  employees_uset.insert(Employee(fio, hireDate, position, salary));
   }
   fin.close();
   std::ofstream fout_set;
@@ -48,9 +48,8 @@ int main() {
     std::cerr << "Error: Could not open output file" << std::endl;
     return 1;
   }
-  for (auto employee : employees_uset) {
+  /*for (auto employee : employees_uset) {
     fout_uset << employee;
-  }
-  fout_uset.close();
+  }*/ fout_uset.close();
   return 0;
 }
