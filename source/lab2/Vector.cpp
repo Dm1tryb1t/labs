@@ -60,6 +60,7 @@ Vector& Vector::operator = (const Vector& other_vec) {
   sz = other_vec.sz;
   elems = new double[sz];
   for (int i = 0; i < sz; ++i) elems[i] = other_vec.elems[i];
+  std::cout << "copy" << std::endl;
   return *this;
 }
 Vector& Vector::operator = (Vector&& other_vec) {
@@ -67,6 +68,7 @@ Vector& Vector::operator = (Vector&& other_vec) {
   sz = 0;
   std::swap(sz, other_vec.sz);
   std::swap(elems, other_vec.elems);
+  std::cout << "replace" << std::endl;
   return *this;
 }
 
@@ -77,10 +79,8 @@ std::istream& operator >> (std::istream& in, Vector& vec) {
   for (int i = 0; i < sz; ++i) {
     in >> arr[i];
   }
-  Vector vv(arr, sz);
-  vec = vv;
+  vec = Vector(arr,sz);
   if (arr) delete[] arr;
-  vv.clear();
   return in;
 }
 std::ostream& operator << (std::ostream& out, Vector& vec) {

@@ -24,9 +24,9 @@ public:
   Vector& operator = (Vector&&);
 };
 
-std::istream& operator >> (std::istream& in, Vector& vec);
-std::ostream& operator << (std::ostream& out, Vector& vec);
+std::istream& operator >> (std::istream&, Vector&);
+std::ostream& operator << (std::ostream&, Vector&);
 
-Vector operator + (Vector& vec1, Vector& vec2);
+Vector operator + (Vector&, Vector&);
 
 #endif

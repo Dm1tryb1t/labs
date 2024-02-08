@@ -1,6 +1,6 @@
 #include "Vector.h"
 
-// g++ ./source/lab2/lab2.cpp ./source/lab2/Vector.cpp -o ./build/lab2
+// g++ source/lab2/lab2.cpp source/lab2/Vector.cpp -o build/lab2
 
 #include <fstream>
 #include <iostream>
@@ -13,9 +13,11 @@
 // const char* output_path = "./output/";
 
 int main() {
+  double arr[] = {1.0, 2.0, 3.0, 4.0, 5.0};
   std::ifstream in;
   Vector vec1;
   Vector vec2;
+  Vector vec3(arr, 5);
   in.open("./input/input_lab2.txt");
   if (!in.is_open()) {
     std::cerr << "Error: Could not open input file\n";
@@ -31,7 +33,7 @@ int main() {
     std::cerr << "Error: Could not open output file\n";
     return 1;
   }
-  out << vec1 << vec2;
+  out << vec1 << vec2 << vec3;
   out.close();
   return 0;
 }
