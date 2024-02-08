@@ -21,7 +21,7 @@ void Rectangle::print_areaValue() {
             << "\tarea value: " << calculate_area() << std::endl;
 }
 
-Cuboid::Cuboid(double length, double width, double height) : Rectangle(length, width), height(height) {
+Cuboid::Cuboid(double length, double width, double height) : Rectangle(length, width) {
   this->height = height;
 }
 

@@ -1,4 +1,4 @@
-		Protection classes that can be used for:
+Protection classes that can be used for protection class number 2 are:
 	Name: C10
 	Protection class number: 2
 	Name: C8

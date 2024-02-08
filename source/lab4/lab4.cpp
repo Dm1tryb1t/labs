@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+// g++ source/lab4/lab4.cpp source/lab4/Employee.cpp -o build/lab4
+
 std::string tmp;
 int main() {
   std::list<Employee> employees_list;

@@ -1,6 +1,6 @@
 #include "Hardware_and_software_protection.h"
 
-// g++ ./source/lab1/Hardware_and_software_protection.cpp ./source/lab1/lab1.cpp -o ./build/lab1
+// g++ source/lab1/Hardware_and_software_protection.cpp source/lab1/lab1.cpp -o build/lab1
 
 #include<fstream>
 #include<iostream>
@@ -57,8 +57,10 @@ int solve_with_indicator() {
     std::cerr << "Error: Cannot open output file" << std::endl;
     return 1;
   }
-  std::cout << "\t\tProtection classes that can be used for:\n";
-  fout << "\t\tProtection classes that can be used for:\n";
+  std::cout << "Protection classes that can be used for protection class number "
+            << protection_class_number << " are:\n";
+  fout << "Protection classes that can be used for protection class number "
+            << protection_class_number << " are:\n";
   for (int i = 0; i < number_of_Hardware_and_software_protection; ++i) {
     if (protection_class[i]->can_be_used(protection_class_number)) {
       protection_class[i]->print_info(std::cout);

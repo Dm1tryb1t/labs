@@ -41,12 +41,11 @@ bool Vector::empty() {
   return sz == 0;
 }
 void Vector::clear() {
-  if (!empty()) {
-    delete[] elems;
-    elems = nullptr;
-    sz = 0;
-    // std::cout << "Vector is cleared" << std::endl;
-  }
+  if (sz == 0) return;
+  delete[] elems;
+  elems = nullptr;
+  sz = 0;
+  // std::cout << "Vector is cleared" << std::endl;
 }
 
 double Vector::operator [] (int idx) {
@@ -57,10 +56,11 @@ double Vector::operator [] (int idx) {
   return elems[idx];
 }
 Vector& Vector::operator = (const Vector& other_vec) {
+  if (elems) delete[] elems;
   sz = other_vec.sz;
   elems = new double[sz];
   for (int i = 0; i < sz; ++i) elems[i] = other_vec.elems[i];
-  std::cout << "copy" << std::endl;
+  std::cout << "copy value" << std::endl;
   return *this;
 }
 Vector& Vector::operator = (Vector&& other_vec) {
@@ -68,7 +68,7 @@ Vector& Vector::operator = (Vector&& other_vec) {
   sz = 0;
   std::swap(sz, other_vec.sz);
   std::swap(elems, other_vec.elems);
-  std::cout << "replace" << std::endl;
+  std::cout << "replace object" << std::endl;
   return *this;
 }
 
