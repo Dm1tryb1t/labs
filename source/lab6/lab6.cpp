@@ -2,7 +2,7 @@
 #include <string>
 
 class PrimeNumberException : std::invalid_argument {
-//cprotected:
+// protected:
   std::string message;
 public:
   PrimeNumberException(std::string message) : std::invalid_argument(message) {
