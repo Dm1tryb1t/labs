@@ -1,4 +1,6 @@
-Protection classes that can be used for protection class number 2 are:
+Protection classes that can be used for protection class number 3 are:
+	Name: C1
+	Protection class number: 3
 	Name: C10
 	Protection class number: 2
 	Name: C8

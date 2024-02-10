@@ -21,12 +21,16 @@ public:
   
   double operator [] (int);
   Vector& operator = (const Vector&);
-  Vector& operator = (Vector&&);
+  Vector& operator = (Vector&&);\
+
+  Vector& operator ++ ();
+  Vector operator ++ (int);
 };
 
 std::istream& operator >> (std::istream&, Vector&);
 std::ostream& operator << (std::ostream&, Vector&);
 
 Vector operator + (Vector&, Vector&);
+
 
 #endif

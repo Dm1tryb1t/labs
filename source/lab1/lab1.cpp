@@ -1,6 +1,6 @@
 #include "Hardware_and_software_protection.h"
 
-// g++ source/lab1/HSP.cpp source/lab1/lab1.cpp -o build/lab1
+// g++ source/lab1/Hardware_and_software_protection.cpp source/lab1/lab1.cpp -o build/lab1
 
 #include<fstream>
 #include<iostream>

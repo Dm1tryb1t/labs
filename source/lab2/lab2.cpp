@@ -6,12 +6,6 @@
 #include <iostream>
 #include <string>
 
-// const int sz = 10;
-// const char* input_filename = "input_lab2.txt";
-// const char* output_filename = "output_lab2.txt";
-// const char* input_path = "./input/";
-// const char* output_path = "./output/";
-
 int main() {
   double arr[] = {1.0, 2.0, 3.0, 4.0, 5.0};
   std::ifstream in;
@@ -27,6 +21,14 @@ int main() {
   in.close();
   vec1 = vec2;
   vec1 = vec1 + vec2;
+  std::cout << vec1[0] << ' ' << vec1[1] << ' ' << vec1[2] << std::endl;
+  vec1 = vec1;
+  std::cout << vec1[0] << ' ' << vec2[0] << std::endl;
+  vec2 = vec1++;
+  std::cout << vec1[0] << ' ' << vec2[0] << std::endl;
+  vec2 = ++vec1;
+  std::cout << vec1[0] << ' ' << vec2[0] << std::endl;
+  std::cout << vec1[0] << ' ' << vec1[1] << ' ' << vec1[2] << std::endl;
   std::ofstream out;
   out.open("./output/output_lab2.txt");
   if (!out.is_open()) {

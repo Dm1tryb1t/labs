@@ -20,7 +20,8 @@ Vector::Vector(const Vector& other_vec) {
   // std::cout << "vector whith another one copy " << std::endl;
 }
 Vector::Vector(Vector&& other_vec) {
-  if (elems) delete[] elems;
+  //if (elems) delete[] elems;
+  elems = nullptr;
   sz = 0;
   std::swap(sz, other_vec.sz);
   std::swap(elems, other_vec.elems);
@@ -32,6 +33,7 @@ Vector::~Vector() {
     sz = 0;
     // std::cout << "Vector is cleared." << std::endl;
   }
+  elems = nullptr;
 }
 
 int Vector::size() {
@@ -56,6 +58,7 @@ double Vector::operator [] (int idx) {
   return elems[idx];
 }
 Vector& Vector::operator = (const Vector& other_vec) {
+  if (elems == other_vec.elems) return *this;
   if (elems) delete[] elems;
   sz = other_vec.sz;
   elems = new double[sz];
@@ -66,6 +69,7 @@ Vector& Vector::operator = (const Vector& other_vec) {
 Vector& Vector::operator = (Vector&& other_vec) {
   if (elems) delete[] elems;
   sz = 0;
+  elems = nullptr;
   std::swap(sz, other_vec.sz);
   std::swap(elems, other_vec.elems);
   std::cout << "replace object" << std::endl;
@@ -100,4 +104,14 @@ Vector operator + (Vector& vec1, Vector& vec2) {
   Vector res_vec(arr, sz);
   if (arr) delete[] arr;
   return res_vec;
+}
+
+Vector& Vector::operator ++ () {
+  for (int i = 0; i < sz; ++i) ++elems[i];
+  return *this;
+}
+Vector Vector::operator ++ (int) {
+  Vector vec = *this;
+  for (int i = 0; i < sz; ++i) elems[i]++;
+  return vec;
 }

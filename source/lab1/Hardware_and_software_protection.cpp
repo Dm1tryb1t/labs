@@ -3,9 +3,10 @@
 #include <iostream>
 #include <string>
 
-HSP::HSP() {
+HSP::HSP() { 
   name = "undefined";
   protection_class_number = 0;
+  std::cout << "Hello\n";
 }
 HSP::HSP(const std::string& name, int protection_class_number) {
   this->name = name;

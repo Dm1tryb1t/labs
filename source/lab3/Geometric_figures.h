@@ -10,9 +10,9 @@ protected:
 public:
   Rectangle(double length, double width);
 
-  double calculate_area();
-  void print_sidesValue();
-  void print_areaValue();
+  virtual double calculate_area();
+  virtual void print_sidesValue();
+  virtual void print_areaValue();
 };
 
 class Cuboid : Rectangle {
@@ -22,9 +22,9 @@ protected:
 public:
   Cuboid(double length, double width, double height);
 
-  virtual double calculate_area();
-  virtual void print_sidesValue();
-  virtual void print_areaValue();
+  double calculate_area() override;
+  void print_sidesValue() override;
+  void print_areaValue() override;
 };
 
 #endif
