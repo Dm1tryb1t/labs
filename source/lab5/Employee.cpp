@@ -58,11 +58,20 @@ size_t MyHashFunction::operator()(const Employee& employee) const {
 bool operator < (const Employee& first, const Employee& second) {
   return first.getSalary() < second.getSalary();
 }
+bool operator <= (const Employee& first, const Employee& second) {
+  return first.getSalary() <= second.getSalary();
+}
 bool operator > (const Employee& first, const Employee& second) {
   return first.getSalary() > second.getSalary();
 }
+bool operator >= (const Employee& first, const Employee& second) {
+  return first.getSalary() >= second.getSalary();
+}
 bool operator == (const Employee& first, const Employee& second) {
   return first.getSalary() == second.getSalary();
+}
+bool operator != (const Employee& first, const Employee& second) {
+  return first.getSalary() != second.getSalary();
 }
 
 

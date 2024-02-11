@@ -10,19 +10,19 @@ protected:
 public:
   Rectangle(double length, double width);
 
-  virtual double calculate_area();
+  double calculate_area();
   virtual void print_sidesValue();
   virtual void print_areaValue();
 };
 
-class Cuboid : Rectangle {
+class Cuboid : protected Rectangle {
 protected:
   double height;
 
 public:
   Cuboid(double length, double width, double height);
 
-  double calculate_area() override;
+  double calculate_area();
   void print_sidesValue() override;
   void print_areaValue() override;
 };

@@ -15,15 +15,15 @@ public:
   Employee();
   Employee(std::string, std::string, std::string, int);
   Employee(const Employee&);
-  std::string getFio();
-  std::string getHireDate();
-  std::string getPosition();
-  int getSalary();
+  std::string getFio() const;
+  std::string getHireDate() const;
+  std::string getPosition() const;
+  int getSalary() const;
   // .Employee(Employee&);
   void updateSalary(int);
-  Employee& operator = (Employee&);
+  Employee& operator = (const Employee&);
 };
 
-std::ostream& operator << (std::ostream&, Employee&);
+std::ostream& operator << (std::ostream&, const Employee&);
 
 #endif

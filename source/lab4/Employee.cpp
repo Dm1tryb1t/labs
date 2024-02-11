@@ -18,28 +18,25 @@ Employee::Employee(const Employee& employee) {
   hireDate = employee.hireDate;
   position = employee.position;
   salary = employee.salary;
-  /*this->hireDate = employee.getHireDate();
-  this->position = employee.getPosition();
-  this->salary = employee.getSalary();*/
 }
 
-std::string Employee::getFio() {
+std::string Employee::getFio() const {
   return fio;
 }
-std::string Employee::getHireDate() {
+std::string Employee::getHireDate() const {
   return hireDate;
 }
-std::string Employee::getPosition() {
+std::string Employee::getPosition() const {
   return position;
 }
-int Employee::getSalary() {
+int Employee::getSalary() const {
   return salary;
 }
 void Employee::updateSalary(int salary) {
   this->salary = salary;
 }
 
-Employee& Employee::operator = (Employee& employee) {
+Employee& Employee::operator = (const Employee& employee) {
   this->fio = employee.getFio();
   this->hireDate = employee.getHireDate();
   this->position = employee.getPosition();
@@ -47,7 +44,7 @@ Employee& Employee::operator = (Employee& employee) {
   return *this;
 }
 
-std::ostream& operator << (std::ostream& out, Employee& employee) {
+std::ostream& operator << (std::ostream& out, const Employee& employee) {
   return out << "\tFIO: " << employee.getFio() << std::endl
       << "\thire date: " << employee.getHireDate() << std::endl
       << "\tposition: " << employee.getPosition() << std::endl

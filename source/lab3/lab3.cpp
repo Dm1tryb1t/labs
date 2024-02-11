@@ -13,14 +13,21 @@ int main() {
   
   Rectangle* rectangle = new Rectangle(length, width);
   Cuboid* cuboid = new Cuboid(length, width, height);
+  // Rectangle rec(length, width);
+  // Cuboid cub(length, width, height);
+  // Rectangle* rect = &cub;
 
   std::cout << "\t\tRectangle parameters:\n";
   rectangle->print_sidesValue();
   rectangle->print_areaValue();
-  
+  // rec.print_sidesValue();
+  // rec.print_areaValue();
+
   std::cout << "\t\tCuboid parameters:\n";
   cuboid->print_sidesValue();
   cuboid->print_areaValue();
+  // cub.print_sidesValue();
+  // cub.print_areaValue();
   
   delete rectangle;
   delete cuboid;

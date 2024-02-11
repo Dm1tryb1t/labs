@@ -17,7 +17,7 @@ public:
   Employee(const Employee&);
   std::string getFio() const;
   std::string getHireDate() const;
-  std::string getPosition()const ;
+  std::string getPosition() const ;
   int getSalary() const;
   // .Employee(Employee&);
   void updateSalary(int);
@@ -31,8 +31,11 @@ public:
 };
 
 bool operator < (const Employee& first, const Employee& second);
+bool operator <= (const Employee& first, const Employee& second);
 bool operator > (const Employee& first, const Employee& second);
+bool operator >= (const Employee& first, const Employee& second);
 bool operator == (const Employee& first, const Employee& second);
+bool operator != (const Employee& first, const Employee& second);
 
 std::ostream& operator << (std::ostream&, const Employee&);
 

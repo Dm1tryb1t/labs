@@ -3,10 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
-Rectangle::Rectangle(double length, double width) {
-  this->length = length;
-  this->width = width;
-}
+Rectangle::Rectangle(double length, double width) : length(length), width(width) {}
 
 double Rectangle::calculate_area() {
   return width * length;
@@ -21,9 +18,7 @@ void Rectangle::print_areaValue() {
             << "\tarea value: " << calculate_area() << std::endl;
 }
 
-Cuboid::Cuboid(double length, double width, double height) : Rectangle(length, width) {
-  this->height = height;
-}
+Cuboid::Cuboid(double length, double width, double height) : Rectangle(length, width), height(height) {}
 
 double Cuboid::calculate_area() {
   return height * Rectangle::calculate_area();
