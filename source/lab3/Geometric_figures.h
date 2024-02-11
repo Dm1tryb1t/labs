@@ -8,21 +8,23 @@ protected:
   double width;
 
 public:
+  Rectangle();
   Rectangle(double length, double width);
 
-  double calculate_area();
+  virtual double calculate_area();
   virtual void print_sidesValue();
   virtual void print_areaValue();
 };
 
-class Cuboid : protected Rectangle {
+class Cuboid : public Rectangle {
 protected:
   double height;
 
 public:
+  Cuboid();
   Cuboid(double length, double width, double height);
 
-  double calculate_area();
+  double calculate_area() override;
   void print_sidesValue() override;
   void print_areaValue() override;
 };

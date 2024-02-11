@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
+Rectangle::Rectangle() : length(0), width(0) {}
 Rectangle::Rectangle(double length, double width) : length(length), width(width) {}
 
 double Rectangle::calculate_area() {
@@ -18,6 +19,7 @@ void Rectangle::print_areaValue() {
             << "\tarea value: " << calculate_area() << std::endl;
 }
 
+Cuboid::Cuboid() : Rectangle(), height(0) {}
 Cuboid::Cuboid(double length, double width, double height) : Rectangle(length, width), height(height) {}
 
 double Cuboid::calculate_area() {
