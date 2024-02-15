@@ -12,6 +12,10 @@ HSP::HSP(const std::string& name, int protection_class_number) {
   this->name = name;
   this->protection_class_number = protection_class_number;
 }
+HSP::HSP(const HSP& other) {
+  name = other.name;
+  protection_class_number = other.protection_class_number;
+}
 int HSP::get_protection_class_number() {
   return protection_class_number;
 }
@@ -22,7 +26,7 @@ bool HSP::can_be_used(int protection_class_number) {
   }
   return this->protection_class_number <= protection_class_number;
 }
-void HSP::print_info(std::ostream &out) {
+void HSP::print_info(std::ostream &out) const {
   out << "\tName: " << name << std::endl;
   out << "\tProtection class number: " << protection_class_number << std::endl;
 }
