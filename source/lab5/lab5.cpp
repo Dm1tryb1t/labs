@@ -13,7 +13,7 @@
 
 
 
-std::string tmp;
+std::string tmp; 
 int main() {
   // std::set<Employee, Comp> employees_set(
   //   [](const Employee& first, const Employee& second) {
