@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Hardware_and_software_protection.h"
 #ifndef SMARTPTR_H
 #define SMARTPTR_H
 
@@ -16,7 +17,7 @@ template<class T>
 class MyUnique_ptr {
   T* ptr = nullptr;
 public:
-  MyUnique_ptr(T* ptr) ptr(ptr) { std::cout << "MyUnique_ptr\n"; }
+  MyUnique_ptr(T* ptr) : ptr(ptr) { std::cout << "MyUnique_ptr\n"; }
   ~MyUnique_ptr() {
     // std::cout << "~MyUnique_ptr\n";
     if (ptr) delete ptr;
@@ -66,7 +67,7 @@ template<class T>
 class MyShared_ptr {
   T* ptr = nullptr;
 public:
-  MyShared_ptr(T* ptr) ptr(ptr) { std::cout << "MyUnique_ptr\n"; }
+  MyShared_ptr(T* ptr) : ptr(ptr) { std::cout << "MyUnique_ptr\n"; }
   ~MyShared_ptr() {
     // std::cout << "~MyUnique_ptr\n";
     if (ptr) delete ptr;
