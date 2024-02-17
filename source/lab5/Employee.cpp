@@ -52,26 +52,23 @@ Employee& Employee::operator = (Employee& employee) {
 }*/
 
 size_t MyHashFunction::operator()(const Employee& employee) const {
-  return employee.getSalary();
+  size_t hash = employee.getSalary();
+  for (char sym : employee.getFio()) {
+    hash += (int)sym;
+  }
+  return hash;
 }
 
 bool operator < (const Employee& first, const Employee& second) {
+  if (first.getSalary() == second.getSalary()) return first.getFio() < second.getFio();
   return first.getSalary() < second.getSalary();
 }
-bool operator <= (const Employee& first, const Employee& second) {
-  return first.getSalary() <= second.getSalary();
-}
 bool operator > (const Employee& first, const Employee& second) {
+  if (first.getSalary() == second.getSalary()) return first.getFio() > second.getFio();
   return first.getSalary() > second.getSalary();
 }
-bool operator >= (const Employee& first, const Employee& second) {
-  return first.getSalary() >= second.getSalary();
-}
 bool operator == (const Employee& first, const Employee& second) {
-  return first.getSalary() == second.getSalary();
-}
-bool operator != (const Employee& first, const Employee& second) {
-  return first.getSalary() != second.getSalary();
+  return first.getFio() == second.getFio();
 }
 
 

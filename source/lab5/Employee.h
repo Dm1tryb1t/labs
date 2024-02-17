@@ -26,16 +26,16 @@ public:
 
 class MyHashFunction {
 public:
-  // salary is returned as hash function
+  
   size_t operator()(const Employee& employee) const;
 };
 
 bool operator < (const Employee& first, const Employee& second);
-bool operator <= (const Employee& first, const Employee& second);
+// bool operator <= (const Employee& first, const Employee& second);
 bool operator > (const Employee& first, const Employee& second);
-bool operator >= (const Employee& first, const Employee& second);
+// bool operator >= (const Employee& first, const Employee& second);
 bool operator == (const Employee& first, const Employee& second);
-bool operator != (const Employee& first, const Employee& second);
+// bool operator != (const Employee& first, const Employee& second);
 
 std::ostream& operator << (std::ostream&, const Employee&);
 

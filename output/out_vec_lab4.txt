@@ -13,3 +13,8 @@
 	hire date: 23.12.23
 	position: qqq
 	salary: 123456
+		==========Employee 4 ==========
+	FIO: ddd
+	hire date: 23.23.23
+	position: fhdjlh
+	salary: 657

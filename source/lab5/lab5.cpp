@@ -5,21 +5,12 @@
 #include <set>
 #include <string>
 #include <unordered_set>
-// #include <functional>
 
 // g++ source/lab5/lab5.cpp source/lab5/Employee.cpp -o build/lab5
-
-// using Comp = std::function<bool(const Employee& first, const Employee& second)>;
-
 
 
 std::string tmp; 
 int main() {
-  // std::set<Employee, Comp> employees_set(
-  //   [](const Employee& first, const Employee& second) {
-  //     return first.getSalary() < second.getSalary();
-  //   });
-  // std::unordered_set<Employee, Employee::HashFunction> employees_uset;
   std::set<Employee> employees_set;
   std::unordered_set<Employee, MyHashFunction> employees_uset;
   int employees_count;
@@ -67,7 +58,7 @@ int main() {
   }
   for (const auto& employee : employees_set) {
     fout_set << employee;
-    std::cout << employee;
+    // std::cout << employee;
   }
   fout_set.close();
   std::ofstream fout_uset;

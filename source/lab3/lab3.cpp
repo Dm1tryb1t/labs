@@ -29,7 +29,6 @@ int main() {
   // cuboid->print_areaValue();
   rect1->print_sidesValue();
   rect1->print_areaValue();
-  
   delete rectangle;
   delete cuboid;
   return 0;

@@ -6,6 +6,10 @@
 	hire date: 12.12.12
 	position: ppp
 	salary: 1234
+	FIO: ddd
+	hire date: 12.12.12
+	position: qqq
+	salary: 1234
 	FIO: ccc
 	hire date: 23.12.23
 	position: qqq
