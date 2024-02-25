@@ -1,10 +1,14 @@
 #include <algorithm>
 #include <chrono>
+// #include <condition_variable>
 #include <iostream>
 #include <mutex>
 #include <thread>
 #include <random>
 
+//  g++ source/lab7/Source1.cpp -o build/lab7_thread -w
+
+// std::condition_variable condition_variable;
 std::mutex cout_guard;
 
 void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
@@ -18,12 +22,12 @@ void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
 	// std::sort(arr + l - 1, arr + r);
 	std::cout << std::endl;
 	for (int i = l - 1; i < r; ++i) {
+		// const std::lock_guard<std::mutex> lock(cout_guard);
 		cout_guard.lock();
 		std::cout << std::endl
-		  				<< thread_name << ' '
-							<< std::endl;
-		// std::this_thread::sleep_for(std::chrono::milliseconds(10));
-		std::cout << arr[i] << " ";
+		  				<< thread_name << ' ';
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		std::cout << arr[i];
 		cout_guard.unlock();
   }
 }
@@ -51,7 +55,6 @@ int main() {
 											array, second_half.first, second_half.second, thread_name2);
 	thread1.join();
 	thread2.join();
-	
 	// Sorting the full array
 	std::thread thread3(sort_from_l_to_r,
 											array, first_half.first, second_half.second, thread_name3);

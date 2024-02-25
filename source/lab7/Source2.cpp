@@ -4,6 +4,8 @@
 #include <random>
 #include <future>
 
+//  g++ source/lab7/Source2.cpp -o build/lab7_future -w
+
 std::mutex cout_guard;
 
 void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
@@ -17,13 +19,12 @@ void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
 	// std::sort(arr + l - 1, arr + r);
 	std::cout << std::endl;
 	for (int i = l - 1; i < r; ++i) {
+		// const std::lock_guard<std::mutex> lock(cout_guard);
 		cout_guard.lock();
-    // std::this_thread::sleep_for(std::chrono::milliseconds(10));
     std::cout << std::endl
-		  				<< thread_name << ' '
-							<< std::endl;
-		// std::this_thread::sleep_for(std::chrono::milliseconds(10));
-		std::cout << arr[i] << " ";
+		  				<< thread_name << ' ';
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		std::cout << arr[i];
     cout_guard.unlock();
   }
 }
@@ -74,7 +75,10 @@ int main()
 	// 	std::cout << array[i] << ' ';
 	// }
 
-	std::cout << "Main thread has stopped working" << std::endl;
-	std::cout << "It took " << elapsed_time.count() << " milliseconds" << std::endl;
+	std::cout << std::endl
+						<< "Main thread has stopped working"
+						<< std::endl;
+	std::cout << "It took " << elapsed_time.count() << " milliseconds"
+						<< std::endl;
 	return 0;
 }
