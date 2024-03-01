@@ -4,6 +4,7 @@
     "set": "cpp",
     "stdexcept": "cpp",
     "exception": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "condition_variable": "cpp"
   }
 }

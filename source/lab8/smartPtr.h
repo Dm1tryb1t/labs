@@ -1,5 +1,7 @@
-#include <iostream>
 #include "Hardware_and_software_protection.h"
+
+#include <iostream>
+
 #ifndef SMARTPTR_H
 #define SMARTPTR_H
 
@@ -49,7 +51,9 @@ public:
 };
 
 
-template<class T>
+// Исправить:
+
+/*template<class T>
 void Make_MyUnique(const T& x)
 {
 	MyUnique_ptr<T> ptr(new T(x));
@@ -61,7 +65,7 @@ void Make_MyUnique(const T& x, const Args&... args) {
 	MyUnique_ptr<T> ptr(new T(x));
   x.print_info(std::cout);
   Make_MyUnique(args...);
-}
+}*/
 
 template<class T>
 class MyShared_ptr {
@@ -98,7 +102,10 @@ public:
   }
 };
 
-template<class T>
+
+// Исправить:
+
+/*template<class T>
 void Make_MyShared(const T& x)
 {
 	MyShared_ptr<T> ptr(new T(x));
@@ -110,6 +117,6 @@ void Make_MyShared(const T& x, const Args&... args) {
 	MyShared_ptr<T> ptr(new T(x));
   x.print_info(std::cout);
   Make_MyUnique(args...);
-}
+}*/
 
 #endif

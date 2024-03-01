@@ -11,6 +11,6 @@ int main() {
   my_ptr1->print_info(std::cout);
   // MyUnique_ptr<int> my_ptr2(new int(4));
   // std::cout << *my_ptr2 << std::endl;
-  Make_MyUnique(HSP("sss", 2), Point(1, 2), HSP("ddd", 3));
+  // Make_MyUnique(HSP("sss", 2), Point(1, 2), HSP("ddd", 3));
   return 0;
 }

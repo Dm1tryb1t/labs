@@ -1,3 +1,4 @@
+#include <condition_variable>
 #include <iostream>
 #include <chrono>
 #include <mutex>
@@ -7,6 +8,7 @@
 //  g++ source/lab7/Source2.cpp -o build/lab7_future -w
 
 std::mutex cout_guard;
+std::condition_variable condition_variable;
 
 void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
 	for (int i = l - 1; i < r; ++i) {
@@ -27,6 +29,7 @@ void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
 		std::cout << arr[i];
     cout_guard.unlock();
   }
+	condition_variable.notify_one();
 }
 
 const int ARR_SIZE = 20;
@@ -51,11 +54,14 @@ void Working() {
 	// Sorting the second half of array
   std::future<void> thread2 = std::async(sort_from_l_to_r,
 											array, second_half.first, second_half.second, thread_name2);
-	thread1.wait();
-	thread2.wait();
+	thread1.wait(); thread2.wait();
+	
   // Sorting the full array
   std::future<void> thread3 = std::async(sort_from_l_to_r,
 											array, first_half.first, second_half.second, thread_name3);
+	thread3.wait();
+	std::cout << std::endl
+						<< "All threads have completed their tasks";
 }
 
 int main()
