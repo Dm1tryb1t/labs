@@ -51,7 +51,7 @@ public:
 };
 
 
-// Исправить:
+// Хуита == Исправить:
 
 /*template<class T>
 void Make_MyUnique(const T& x)
@@ -103,7 +103,7 @@ public:
 };
 
 
-// Исправить:
+// Хуита == Исправить:
 
 /*template<class T>
 void Make_MyShared(const T& x)
