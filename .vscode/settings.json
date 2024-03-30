@@ -5,6 +5,7 @@
     "stdexcept": "cpp",
     "exception": "cpp",
     "thread": "cpp",
-    "condition_variable": "cpp"
+    "condition_variable": "cpp",
+    "string": "cpp"
   }
 }
