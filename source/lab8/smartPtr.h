@@ -108,10 +108,12 @@ public:
     if (ptr_count == 1 && ptr) {
       delete ptr;
       ptr = nullptr;
+      std::cout << "delete\n";
     }
     --ptr_count;
-    // std::cout << "~MyUnique_ptr\n";
+    std::cout << ptr_count << '\n';
   }
+
 
   T* get() const {
     return ptr;
@@ -131,19 +133,25 @@ public:
 
   MyShared_ptr<T> operator = (MyShared_ptr<T>& other) {
     if (this.ptr == other.ptr) return *this;
-    if (ptr) delete ptr;
+    if (ptr_count == 1 && ptr) delete ptr;
     ptr = nullptr;
     ptr = other.ptr;
     ptr_count = ++other.ptr_count;
   }
   MyShared_ptr<T>& operator = (MyShared_ptr<T>&& other) {
-    if (this.ptr == other.ptr) return *this;
-    if (ptr) delete ptr;
+    if (this.ptr == other.ptr) {
+      other.ptr = nullptr;
+      other.ptr_count = 0;
+      return *this;
+    }
+    if (ptr_count == 1 && ptr) delete ptr;
     ptr = nullptr;
-    ptr_count = 0;
-    std::swap(ptr, other.ptr);
-    std::swap(ptr_count, other.ptr_count);
-    return this;
+    --ptr_count;
+    ptr = other.ptr;
+    other.ptr = nullptr;
+    ptr_count = other.ptr_count;
+    other.ptr_count = 0;
+    return *this;
   }
 };
 
