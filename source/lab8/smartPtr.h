@@ -1,13 +1,17 @@
 #include "Hardware_and_software_protection.h"
 
 #include <iostream>
+#include <vector>
+#include <map>
+#include <string>
+// #include <memory>
 
 #ifndef SMARTPTR_H
 #define SMARTPTR_H
 
-
 class Point {
   int x, y;
+  
 public:
   Point(int x, int y) : x(x), y(y) {}
   void print_info(std::ostream& out) const { 
@@ -19,7 +23,11 @@ template<class T>
 class MyUnique_ptr {
   T* ptr = nullptr;
 public:
-  MyUnique_ptr(T* ptr) : ptr(ptr) { std::cout << "MyUnique_ptr\n"; }
+  MyUnique_ptr(T* ptr) : ptr(ptr) {  }
+  MyUnique_ptr(const MyUnique_ptr<T>& other) = delete;
+  MyUnique_ptr(MyUnique_ptr<T>&& other) {
+    std::swap(ptr, other.ptr);
+  }
   ~MyUnique_ptr() {
     // std::cout << "~MyUnique_ptr\n";
     if (ptr) delete ptr;
@@ -30,93 +38,143 @@ public:
   T* get() const {
     return ptr;
   }
-  
   T& operator*() {
+    /* if (ptr) */ return *ptr;
+  }
+  T& operator*() const {
     /* if (ptr) */ return *ptr;
   }
   T* operator->() {
     return ptr;
   }
-
-  MyUnique_ptr<T> operator = (const MyUnique_ptr<T>&) {
-    throw std::exception("Copy is restricted\n");
+  T* operator->() const {
+    return ptr;
   }
+  
+  MyUnique_ptr<T> operator = (const MyUnique_ptr<T>&) = delete;
   MyUnique_ptr<T>& operator = (MyUnique_ptr<T>&& other) {
-    if (this == other) return this;
+    if (this == other) return *this;
     if (ptr) delete ptr;
     ptr = nullptr;
     std::swap(ptr, other.ptr);
-    return this;
+    return *this;
   }
 };
 
-
-// Хуита == Исправить:
-
-/*template<class T>
-void Make_MyUnique(const T& x)
-{
-	MyUnique_ptr<T> ptr(new T(x));
-  x.print_info(std::cout);
+template<class T>
+std::ostream& operator << (std::ostream& out, const MyUnique_ptr<T>& ptr) {
+  return out << *ptr;
 }
 
-template<class T, class...Args>
-void Make_MyUnique(const T& x, const Args&... args) {
-	MyUnique_ptr<T> ptr(new T(x));
-  x.print_info(std::cout);
-  Make_MyUnique(args...);
-}*/
+template <class T>
+void create_uniqueqq(std::vector<MyUnique_ptr<T>>& vec, const T& t) {
+  vec.push_back(MyUnique_ptr<T>(new T(t)));
+}
+
+template <class T>
+MyUnique_ptr<T> create_unique(const T& t) {
+	return MyUnique_ptr<T>(new T(t));
+}
+
+template <class T, class ...Args>
+void create_uniqueqq(std::vector<MyUnique_ptr<T>>& vec, const T& t, const Args& ... args) {
+  vec.push_back(MyUnique_ptr<T>(new T(t)));
+  create_uniqueqq(vec, args ...);
+}
+
+template <class T, class ...Args>
+std::vector<MyUnique_ptr<T>> create_unique(const T& t, const Args& ... args) {
+	std::vector<MyUnique_ptr<T>> vec;
+  create_uniqueqq(vec, t, args ...);
+  return vec;
+}
 
 template<class T>
 class MyShared_ptr {
   T* ptr = nullptr;
+  int ptr_count = 0;
 public:
-  MyShared_ptr(T* ptr) : ptr(ptr) { std::cout << "MyUnique_ptr\n"; }
+  MyShared_ptr(T* ptr) : ptr(ptr) { ptr_count = 1; }
+  MyShared_ptr(MyShared_ptr& other) {
+    ptr = other.ptr;
+    ptr_count = ++other.ptr_count;
+  }
+  MyShared_ptr(MyShared_ptr&& other) {
+    ptr = other.ptr;
+    ptr_count = other.ptr_count;
+  }
   ~MyShared_ptr() {
     // std::cout << "~MyUnique_ptr\n";
-    if (ptr) delete ptr;
-    ptr = nullptr;
+    if (ptr_count == 1 && ptr) {
+      delete ptr;
+      ptr = nullptr;
+    }
+    --ptr_count;
     // std::cout << "~MyUnique_ptr\n";
   }
 
   T* get() const {
     return ptr;
   }
-  
   T& operator*() {
+    /* if (ptr) */ return *ptr;
+  }
+  T& operator*() const {
     /* if (ptr) */ return *ptr;
   }
   T* operator->() {
     return ptr;
   }
-
-  MyShared_ptr<T> operator = (const MyShared_ptr<T>& other) {
-    ptr = other.ptr;
+  T* operator->() const {
+    return ptr;
   }
-  MyShared_ptr<T>& operator = (MyShared_ptr<T>&& other) {
-    if (this == other) return this;
+
+  MyShared_ptr<T> operator = (MyShared_ptr<T>& other) {
+    if (this.ptr == other.ptr) return *this;
     if (ptr) delete ptr;
     ptr = nullptr;
+    ptr = other.ptr;
+    ptr_count = ++other.ptr_count;
+  }
+  MyShared_ptr<T>& operator = (MyShared_ptr<T>&& other) {
+    if (this.ptr == other.ptr) return *this;
+    if (ptr) delete ptr;
+    ptr = nullptr;
+    ptr_count = 0;
     std::swap(ptr, other.ptr);
+    std::swap(ptr_count, other.ptr_count);
     return this;
   }
 };
 
-
-// Хуита == Исправить:
-
-/*template<class T>
-void Make_MyShared(const T& x)
-{
-	MyShared_ptr<T> ptr(new T(x));
-  x.print_info(std::cout);
+template<class T>
+std::ostream& operator << (std::ostream& out, const MyShared_ptr<T>& ptr) {
+  return out << *ptr;
 }
 
-template<class T, class...Args>
-void Make_MyShared(const T& x, const Args&... args) {
-	MyShared_ptr<T> ptr(new T(x));
-  x.print_info(std::cout);
-  Make_MyUnique(args...);
-}*/
+template <class T>
+void create_sharedqq(std::vector<MyShared_ptr<T>>& vec, const T& t) {
+  vec.push_back(MyShared_ptr<T>(new T(t)));
+}
+
+template <class T>
+MyShared_ptr<T> create_shared(const T& t) {
+	return MyShared_ptr<T>(new T(t));
+}
+
+template <class T, class ...Args>
+void create_sharedqq(std::vector<MyShared_ptr<T>>& vec, const T& t, const Args& ... args) {
+  vec.push_back(MyShared_ptr<T>(new T(t)));
+  create_sharedqq(vec, args ...);
+}
+
+template <class T, class ...Args>
+std::vector<MyShared_ptr<T>> create_shared(const T& t, const Args& ... args) {
+	std::vector<MyShared_ptr<T>> vec;
+  create_sharedqq(vec, t, args ...);
+  return vec;
+}
+
+
 
 #endif

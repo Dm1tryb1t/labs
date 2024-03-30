@@ -27,12 +27,12 @@ public:
 class MyHashFunction {
 public:
   
-  size_t operator()(const Employee& employee) const;
+  size_t operator()(const Employee&) const;
 };
 
 bool operator < (const Employee& first, const Employee& second);
 // bool operator <= (const Employee& first, const Employee& second);
-bool operator > (const Employee& first, const Employee& second);
+// bool operator > (const Employee& first, const Employee& second);
 // bool operator >= (const Employee& first, const Employee& second);
 bool operator == (const Employee& first, const Employee& second);
 // bool operator != (const Employee& first, const Employee& second);

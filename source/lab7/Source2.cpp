@@ -8,7 +8,7 @@
 //  g++ source/lab7/Source2.cpp -o build/lab7_future -w
 
 std::mutex cout_guard;
-std::condition_variable condition_variable;
+// std::condition_variable condition_variable;
 
 void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
 	for (int i = l - 1; i < r; ++i) {
@@ -29,7 +29,7 @@ void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
 		std::cout << arr[i];
     cout_guard.unlock();
   }
-	condition_variable.notify_one();
+	// condition_variable.notify_one();
 }
 
 const int ARR_SIZE = 20;

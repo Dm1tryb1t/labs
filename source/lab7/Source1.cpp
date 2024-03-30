@@ -9,12 +9,6 @@
 
 //  g++ source/lab7/Source1.cpp -o build/lab7_thread -w
 
-// std::atomic<bool> first_is_done(false), second_is_done(false), third_is_done(false);
-char* thread_name1 = "thread1";
-char* thread_name2 = "thread2";
-char* thread_name3 = "thread3";
-
- 
 
 
 std::condition_variable condition_variable;
@@ -45,7 +39,9 @@ void sort_from_l_to_r(double* arr, int l, int r, char* thread_name) {
 const int ARR_SIZE = 20;
 
 int main() {
-	
+	char* thread_name1 = "thread1";
+	char* thread_name2 = "thread2";
+	char* thread_name3 = "thread3";
 	srand(time(NULL));
 	double array[ARR_SIZE];
 	for (int i = 0; i < ARR_SIZE; i++) {

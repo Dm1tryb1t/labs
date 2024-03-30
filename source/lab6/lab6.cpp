@@ -19,7 +19,8 @@ protected:
   int value;
 
 public:
-  PrimeNumber() = delete;
+  // PrimeNumber() = delete;
+  ~PrimeNumber();
   PrimeNumber(int value) {
     for (int i = 2; i * i <= value; ++i) {
       if (value % i == 0) {
