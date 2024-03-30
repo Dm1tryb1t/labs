@@ -100,8 +100,8 @@ public:
     ptr_count = ++other.ptr_count;
   }
   MyShared_ptr(MyShared_ptr&& other) {
-    ptr = other.ptr;
-    ptr_count = other.ptr_count;
+    std::swap(ptr, other.ptr);
+    std::swap(ptr_count, other.ptr_count);
   }
   ~MyShared_ptr() {
     // std::cout << "~MyUnique_ptr\n";
