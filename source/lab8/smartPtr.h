@@ -14,7 +14,7 @@ class Point {
 
 public:
     Point(int x, int y) : x(x), y(y) {}
-    void print_info(std::ostream& out) const {
+    void prsize_t_info(std::ostream& out) const {
         out << "(" << x << ", " << y << ")\n";
     }
 };
@@ -92,7 +92,7 @@ std::vector<MyUnique_ptr<T>> create_unique(const T& t, const Args& ... args) {
 template<class T>
 class MyShared_ptr {
     T* ptr = nullptr;
-    int* ptr_count = nullptr;
+    size_t* ptr_count = nullptr;
 public:
     MyShared_ptr(T* ptr) {
         if (ptr == nullptr) {
@@ -101,7 +101,7 @@ public:
         }
         else {
             this->ptr = ptr;
-            ptr_count = new int(1);
+            ptr_count = new size_t(1);
         }
         // std::cout << "create shared constructor\n";
     }
@@ -118,19 +118,25 @@ public:
     }
     ~MyShared_ptr() {
         // std::cout << "~MyUnique_ptr\n";
+        // if (ptr) std::cout << *ptr_count << std::endl;
         if (ptr_count && ptr) {
             if (*ptr_count == 1) {
                 delete ptr;
                 delete ptr_count;
                 ptr = nullptr;
                 ptr_count = nullptr;
-                // std::cout << "delete shared\n";
+                std::cout << "delete shared\n";
             }
             else {
                 --(*ptr_count);
                 // std::cout << "increment count " << *ptr_count << '\n';
             }
         }
+    }
+
+    size_t get_ptrCount() const {
+        if (ptr) return *ptr_count;
+        return 0;
     }
 
     T* get() const {
