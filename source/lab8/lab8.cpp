@@ -32,13 +32,13 @@ int main() {
   std::cout << shared2.get_ptrCount() << std::endl;
   std::cout << shared3.get_ptrCount() << std::endl;
   {
-      MyShared_ptr<HSP> shared4(shared1);
-       std::cout << shared1.get_ptrCount() << std::endl;
-  std::cout << shared2.get_ptrCount() << std::endl;
-  std::cout << shared3.get_ptrCount() << std::endl;
+    MyShared_ptr<HSP> shared4(shared1);
+    std::cout << shared1.get_ptrCount() << std::endl;
+    std::cout << shared2.get_ptrCount() << std::endl;
+    std::cout << shared3.get_ptrCount() << std::endl;
     std::cout << shared4.get_ptrCount() << std::endl;
   }
-         std::cout << shared1.get_ptrCount() << std::endl;
+  std::cout << shared1.get_ptrCount() << std::endl;
   std::cout << shared2.get_ptrCount() << std::endl;
   std::cout << shared3.get_ptrCount() << std::endl;
   }
